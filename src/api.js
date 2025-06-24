@@ -1,4 +1,4 @@
-export function getArticles() {
+export const getArticles = () => {
   return fetch(`https://mtl-news-backend.onrender.com/api/articles`).then(
     (res) => {
       if (!res.ok) {
@@ -10,9 +10,9 @@ export function getArticles() {
       return res.json();
     }
   );
-}
+};
 
-export function getArticleById(id) {
+export const getArticleById = (id) => {
   return fetch(`https://mtl-news-backend.onrender.com/api/articles/${id}`).then(
     (res) => {
       if (!res.ok) {
@@ -30,9 +30,9 @@ export function getArticleById(id) {
       return res.json();
     }
   );
-}
+};
 
-export function getCommentsOnArticle(id) {
+export const getCommentsOnArticle = (id) => {
   return fetch(
     `https://mtl-news-backend.onrender.com/api/articles/${id}/comments`
   ).then((res) => {
@@ -44,4 +44,23 @@ export function getCommentsOnArticle(id) {
     }
     return res.json();
   });
-}
+};
+
+export const addVotesToArticle = (id, newVote) => {
+  const voteBody = { inc_votes: newVote };
+  return fetch(`https://mtl-news-backend.onrender.com/api/articles/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(voteBody),
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject({
+        status: res.status,
+        msg: "Voting failed",
+      });
+    }
+    return res.json();
+  });
+};

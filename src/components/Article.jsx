@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getArticleById } from "../api";
+import { getArticleById, addVotesToArticle } from "../api";
 import { useParams } from "react-router-dom";
 import CommentList from "./CommentList";
 
@@ -14,6 +14,9 @@ const Article = () => {
   const [commentsClasses, setCommentsClasses] = useState(
     "comment-list hidden-comments"
   );
+  const [hasVoted, setHasVoted] = useState(false);
+  const [voteCount, setVoteCount] = useState(0);
+  const [voteError, setVoteError] = useState(null);
 
   const toggleComments = () => {
     if (!isCommentsFetched) {
@@ -28,12 +31,38 @@ const Article = () => {
     }
   };
 
+  const handleUpVote = () => {
+    console.log("upvote");
+    setHasVoted(true);
+    setVoteCount((currentVotes) => currentVotes + 1);
+    setVoteError(null);
+    addVotesToArticle(article_id, 1).catch((err) => {
+      setVoteCount((currentVotes) => currentVotes - 1);
+      setHasVoted(false);
+      setVoteError("Your vote was not successful. Please try again!");
+    });
+  };
+
+  const handleDownVote = () => {
+    console.log("downvote");
+    setHasVoted(true);
+    setVoteCount((currentVotes) => currentVotes - 1);
+    setVoteError(null);
+    addVotesToArticle(article_id, -1).catch((err) => {
+      setVoteCount((currentVotes) => currentVotes + 1);
+      setHasVoted(false);
+      setVoteError("Your vote was not successful. Please try again!");
+    });
+  };
+
   useEffect(() => {
     console.log("Article useEffect called");
     setIsLoading(true);
     setIsError(false);
     getArticleById(article_id)
       .then((fetchedArticle) => {
+        console.log(fetchedArticle);
+        setVoteCount(fetchedArticle.article.votes);
         setFullArticle(fetchedArticle);
       })
       .catch((err) => {
@@ -85,8 +114,17 @@ const Article = () => {
           <h2>{title}</h2>
           <p>By: {author}</p>
           <p>Topic: {topic}</p>
-          <p>Votes: {votes}</p>
-          {/* Upvote/downvote buttons to be added here - optimistic */}
+          <p>
+            Votes:{" "}
+            <button onClick={handleDownVote} disabled={hasVoted}>
+              -1
+            </button>{" "}
+            {voteCount}{" "}
+            <button onClick={handleUpVote} disabled={hasVoted}>
+              +1
+            </button>{" "}
+            {voteError}
+          </p>
           <p>Comments: {comment_count}</p>
           <p>{readableDate}</p>
           <p>{body}</p>
