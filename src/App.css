@@ -19,7 +19,15 @@ body {
   padding: 0;
 }
 
-.article-card {
+.comment-list {
+  display: inline;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.article-card,
+.comment-card {
   border: 1px solid black;
   margin: 1em;
   padding: 1em;
@@ -34,4 +42,8 @@ body {
   width: 10em;
   height: 10em;
   object-fit: cover;
+}
+
+.hidden-comments {
+  visibility: hidden;
 }
