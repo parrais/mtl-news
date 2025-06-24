@@ -18,7 +18,6 @@ const Article = () => {
   const toggleComments = () => {
     if (!isCommentsFetched) {
       setIsCommentsFetched(true);
-      //Move load of comments to be at this point
     }
     if (!isCommentsShown) {
       setIsCommentsShown(true);
@@ -97,11 +96,13 @@ const Article = () => {
             </button>
           </p>
         </section>
-        <section className={commentsClasses}>
-          <h2>Comments</h2>
-          <CommentList article_id={article_id} />;
-          {/* Comments form to be added here */}
-        </section>
+        {!isCommentsFetched ? null : (
+          <section className={commentsClasses}>
+            <h2>Comments</h2>
+            <CommentList article_id={article_id} />;
+            {/* Comments form to be added here */}
+          </section>
+        )}
       </>
     );
   }
