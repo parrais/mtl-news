@@ -44,6 +44,8 @@ body {
   object-fit: cover;
 }
 
-.hidden-comments {
+.hidden-comments,
+.hidden-button,
+.hidden-paragraph {
   visibility: hidden;
 }

@@ -1,4 +1,8 @@
-function Header({ username }) {
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+
+function Header() {
+  const { username } = useContext(UserContext);
   return (
     <header>
       <h1>MTL News</h1>

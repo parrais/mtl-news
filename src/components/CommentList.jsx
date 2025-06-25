@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getCommentsOnArticle } from "../api";
 
 import CommentCard from "./CommentCard";
+import CommentForm from "./CommentForm";
 
 const CommentList = ({ article_id }) => {
   const [comments, setComments] = useState([]);
@@ -44,19 +45,35 @@ const CommentList = ({ article_id }) => {
 
   if (comments.length === 0) {
     return (
-      <section>
-        <p>No comments found</p>
+      <section className="comment-area">
+        <section className="new-comment-form">
+          <CommentForm article_id={article_id} />
+        </section>
+        <section className="comment-list-area">
+          <p>No comments found</p>
+        </section>
       </section>
     );
   }
 
   if (comments.length > 0) {
     return (
-      <ul className="comment-list">
-        {comments.map((comment) => {
-          return <CommentCard key={comment.comment_id} comment={comment} />;
-        })}
-      </ul>
+      <section className="comment-area">
+        <section className="new-comment-form">
+          <CommentForm
+            article_id={article_id}
+            comments={comments}
+            setComments={setComments}
+          />
+        </section>
+        <section className="comment-list-area">
+          <ul className="comment-list">
+            {comments.map((comment) => {
+              return <CommentCard key={comment.comment_id} comment={comment} />;
+            })}
+          </ul>
+        </section>
+      </section>
     );
   }
 };

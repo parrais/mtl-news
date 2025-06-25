@@ -32,24 +32,19 @@ const Article = () => {
   };
 
   const handleUpVote = () => {
-    console.log("upvote");
-    setHasVoted(true);
-    setVoteCount((currentVotes) => currentVotes + 1);
-    setVoteError(null);
-    addVotesToArticle(article_id, 1).catch((err) => {
-      setVoteCount((currentVotes) => currentVotes - 1);
-      setHasVoted(false);
-      setVoteError("Your vote was not successful. Please try again!");
-    });
+    handleVote(1);
   };
 
   const handleDownVote = () => {
-    console.log("downvote");
+    handleVote(-1);
+  };
+
+  const handleVote = (input) => {
     setHasVoted(true);
-    setVoteCount((currentVotes) => currentVotes - 1);
+    setVoteCount((currentVotes) => currentVotes + input);
     setVoteError(null);
-    addVotesToArticle(article_id, -1).catch((err) => {
-      setVoteCount((currentVotes) => currentVotes + 1);
+    addVotesToArticle(article_id, input).catch((err) => {
+      setVoteCount((currentVotes) => currentVotes - input);
       setHasVoted(false);
       setVoteError("Your vote was not successful. Please try again!");
     });
@@ -137,8 +132,7 @@ const Article = () => {
         {!isCommentsFetched ? null : (
           <section className={commentsClasses}>
             <h2>Comments</h2>
-            <CommentList article_id={article_id} />;
-            {/* Comments form to be added here */}
+            <CommentList article_id={article_id} />
           </section>
         )}
       </>

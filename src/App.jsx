@@ -7,13 +7,10 @@ import Article from "./components/Article";
 import "./App.css";
 
 const App = () => {
-  const [username, setUsername] = useState("jessjelly");
-
   return (
     <div className="App">
-      <Header username={username} />
+      <Header />
       <main>
-        Main
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
           <Route path="/articles" element={<Articles />} />

@@ -28,7 +28,7 @@ const ArticleList = () => {
   if (isLoading) {
     return (
       <section>
-        <p>LOADING...</p>
+        <p>Loading articles...</p>
       </section>
     );
   }
@@ -36,7 +36,7 @@ const ArticleList = () => {
   if (isError) {
     return (
       <section>
-        <p>ERROR!!</p>
+        <p>Unable to load articles</p>
       </section>
     );
   }
@@ -44,7 +44,7 @@ const ArticleList = () => {
   if (articles.length === 0) {
     return (
       <section>
-        <p>No results found</p>
+        <p>No articles found</p>
       </section>
     );
   }
