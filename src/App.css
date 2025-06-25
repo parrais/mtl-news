@@ -19,22 +19,25 @@ body {
   padding: 0;
 }
 
-.comment-list {
-  display: inline;
+.comment-list,
+.topic-list {
+  display: flex;
   justify-content: center;
   list-style-type: none;
   padding: 0;
 }
 
 .article-card,
-.comment-card {
+.comment-card,
+.topic-card {
   border: 1px solid black;
   margin: 1em;
   padding: 1em;
   border-radius: 5px;
 }
 
-.article-card > h2 {
+.article-card,
+.topic-card > h2 {
   margin: 0;
 }
 

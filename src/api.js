@@ -1,15 +1,15 @@
-export const getArticles = () => {
-  return fetch(`https://mtl-news-backend.onrender.com/api/articles`).then(
-    (res) => {
-      if (!res.ok) {
-        return Promise.reject({
-          status: res.status,
-          msg: "Failed to fetch article list",
-        });
-      }
-      return res.json();
+export const getArticles = (query) => {
+  return fetch(
+    `https://mtl-news-backend.onrender.com/api/articles?${query}`
+  ).then((res) => {
+    if (!res.ok) {
+      return Promise.reject({
+        status: res.status,
+        msg: "Failed to fetch article list",
+      });
     }
-  );
+    return res.json();
+  });
 };
 
 export const getArticleById = (id) => {
@@ -100,4 +100,18 @@ export const deleteCommentById = (id) => {
       });
     }
   });
+};
+
+export const getTopics = () => {
+  return fetch(`https://mtl-news-backend.onrender.com/api/topics`).then(
+    (res) => {
+      if (!res.ok) {
+        return Promise.reject({
+          status: res.status,
+          msg: "Failed to fetch article list",
+        });
+      }
+      return res.json();
+    }
+  );
 };

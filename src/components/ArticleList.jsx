@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
 
-const ArticleList = () => {
+const ArticleList = ({ slug }) => {
+  let query = "";
+  if (typeof slug === "string") {
+    query = `topic=${slug}`;
+  }
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -12,7 +16,7 @@ const ArticleList = () => {
     setIsLoading(true);
     setIsError(false);
     console.log("getArticles called");
-    getArticles()
+    getArticles(query)
       .then((fetchedArticles) => {
         setArticles(fetchedArticles.articles);
       })
