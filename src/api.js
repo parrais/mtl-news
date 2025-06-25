@@ -89,21 +89,15 @@ export const addCommentToArticle = (id, user, commentContent) => {
 };
 
 export const deleteCommentById = (id) => {
+  console.log(id, "id in delete fetch fn");
   return fetch(`https://mtl-news-backend.onrender.com/api/comments/${id}`, {
     method: "DELETE",
   }).then((res) => {
     if (!res.ok) {
-      if (res.status === 404) {
-        return Promise.reject({
-          status: res.status,
-          msg: `No comment found with ID ${id}`,
-        });
-      }
       return Promise.reject({
         status: res.status,
         msg: "Failed to delete comment",
       });
     }
-    return res.json();
   });
 };

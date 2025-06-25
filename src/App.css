@@ -49,3 +49,6 @@ body {
 .hidden-paragraph {
   visibility: hidden;
 }
+.hidden-card {
+  display: none;
+}
