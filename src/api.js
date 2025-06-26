@@ -1,6 +1,7 @@
 export const getArticles = (query) => {
+  const { sortBy, order, topic } = query;
   return fetch(
-    `https://mtl-news-backend.onrender.com/api/articles${query}`
+    `https://mtl-news-backend.onrender.com/api/articles?sort_by=${sortBy}&order=${order}&topic=${topic}`
   ).then((res) => {
     if (!res.ok) {
       if (res.status === 404) {

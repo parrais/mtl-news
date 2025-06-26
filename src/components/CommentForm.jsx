@@ -39,6 +39,7 @@ const CommentForm = ({ article_id, comments, setComments }) => {
           onChange={handleChange}
           value={commentInput}
           required
+          disabled={isSubmitted}
         />{" "}
         <button
           type="submit"

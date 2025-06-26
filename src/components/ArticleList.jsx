@@ -1,23 +1,32 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams, useParams } from "react-router-dom";
 import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
 
-const ArticleList = ({ slug }) => {
-  let query = "";
-  if (typeof slug === "string") {
-    query = `?topic=${slug}`;
-  }
+const ArticleList = () => {
+  const { slug } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  let sortBy = searchParams.get("sort_by") || "created_at";
+  let order = searchParams.get("order") || "desc";
+  let topic = slug || "";
+
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  const handleSortByChange = (e) => {
+    setSearchParams({ sort_by: e.target.value, order: order });
+  };
+  const handleOrderChange = (e) => {
+    setSearchParams({ sort_by: sortBy, order: e.target.value });
+  };
+
   useEffect(() => {
     console.log("ArticleList useEffect called");
     setIsLoading(true);
     setIsError(false);
-    getArticles(query)
+    getArticles({ sortBy, order, topic })
       .then((fetchedArticles) => {
         setArticles(fetchedArticles.articles);
       })
@@ -29,7 +38,7 @@ const ArticleList = ({ slug }) => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [sortBy, order]);
 
   if (isLoading) {
     return (
@@ -63,11 +72,27 @@ const ArticleList = ({ slug }) => {
 
   if (articles.length > 0) {
     return (
-      <ul className="article-list">
-        {articles.map((article) => {
-          return <ArticleCard key={article.article_id} article={article} />;
-        })}
-      </ul>
+      <>
+        <form>
+          <label>
+            Sort articles{" "}
+            <select value={sortBy} onChange={handleSortByChange}>
+              <option value="created_at">Date</option>
+              <option value="comment_count">Comments</option>
+              <option value="votes">Votes</option>
+            </select>{" "}
+            <select value={order} onChange={handleOrderChange}>
+              <option value="desc">Descending</option>
+              <option value="asc">Ascending</option>
+            </select>
+          </label>
+        </form>
+        <ul className="article-list">
+          {articles.map((article) => {
+            return <ArticleCard key={article.article_id} article={article} />;
+          })}
+        </ul>
+      </>
     );
   }
 };
