@@ -1,6 +1,6 @@
 export const getArticles = (query) => {
   return fetch(
-    `https://mtl-news-backend.onrender.com/api/articles?${query}`
+    `https://mtl-news-backend.onrender.com/api/articles${query}`
   ).then((res) => {
     if (!res.ok) {
       return Promise.reject({
@@ -67,7 +67,6 @@ export const addVotesToArticle = (id, newVote) => {
 
 export const addCommentToArticle = (id, user, commentContent) => {
   const commentBody = { author: user, body: commentContent };
-  console.log(id, commentBody);
   return fetch(
     `https://mtl-news-backend.onrender.com/api/articles/${id}/comments`,
     {
@@ -89,7 +88,6 @@ export const addCommentToArticle = (id, user, commentContent) => {
 };
 
 export const deleteCommentById = (id) => {
-  console.log(id, "id in delete fetch fn");
   return fetch(`https://mtl-news-backend.onrender.com/api/comments/${id}`, {
     method: "DELETE",
   }).then((res) => {

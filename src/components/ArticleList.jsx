@@ -5,7 +5,7 @@ import ArticleCard from "./ArticleCard";
 const ArticleList = ({ slug }) => {
   let query = "";
   if (typeof slug === "string") {
-    query = `topic=${slug}`;
+    query = `?topic=${slug}`;
   }
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +15,6 @@ const ArticleList = ({ slug }) => {
     console.log("ArticleList useEffect called");
     setIsLoading(true);
     setIsError(false);
-    console.log("getArticles called");
     getArticles(query)
       .then((fetchedArticles) => {
         setArticles(fetchedArticles.articles);

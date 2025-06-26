@@ -56,7 +56,6 @@ const Article = () => {
     setIsError(false);
     getArticleById(article_id)
       .then((fetchedArticle) => {
-        console.log(fetchedArticle);
         setVoteCount(fetchedArticle.article.votes);
         setFullArticle(fetchedArticle);
       })

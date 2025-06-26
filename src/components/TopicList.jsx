@@ -11,7 +11,6 @@ const TopicList = () => {
     console.log("TopicList useEffect called");
     setIsLoading(true);
     setIsError(false);
-    console.log("getTopics called");
     getTopics()
       .then((fetchedTopics) => {
         setTopics(fetchedTopics.topics);

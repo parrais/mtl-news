@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getCommentsOnArticle } from "../api";
-
 import CommentCard from "./CommentCard";
 import CommentForm from "./CommentForm";
 
@@ -13,7 +12,6 @@ const CommentList = ({ article_id }) => {
     console.log("CommentList useEffect called");
     setIsLoading(true);
     setIsError(false);
-    console.log("getCommentsOnArticle called");
     getCommentsOnArticle(article_id)
       .then((fetchedComments) => {
         setComments(fetchedComments.comments);
