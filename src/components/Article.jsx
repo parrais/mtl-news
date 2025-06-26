@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getArticleById, addVotesToArticle } from "../api";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import CommentList from "./CommentList";
 
 const Article = () => {
@@ -79,7 +79,11 @@ const Article = () => {
   if (isError) {
     return (
       <section>
+        <h2>Error displaying article</h2>
         <p>{errorMessage.msg}</p>
+        <h3>
+          <Link to={`/`}>Go back to the home page</Link>
+        </h3>
       </section>
     );
   }

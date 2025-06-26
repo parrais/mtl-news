@@ -3,9 +3,15 @@ export const getArticles = (query) => {
     `https://mtl-news-backend.onrender.com/api/articles${query}`
   ).then((res) => {
     if (!res.ok) {
+      if (res.status === 404) {
+        return Promise.reject({
+          status: res.status,
+          msg: "No matching articles found",
+        });
+      }
       return Promise.reject({
         status: res.status,
-        msg: "Failed to fetch article list",
+        msg: "Unable to fetch article list",
       });
     }
     return res.json();
@@ -24,7 +30,7 @@ export const getArticleById = (id) => {
         }
         return Promise.reject({
           status: res.status,
-          msg: "Failed to fetch article",
+          msg: "Unable to fetch article",
         });
       }
       return res.json();
@@ -39,7 +45,7 @@ export const getCommentsOnArticle = (id) => {
     if (!res.ok) {
       return Promise.reject({
         status: res.status,
-        msg: "Failed to fetch comment",
+        msg: "Unable to fetch comments",
       });
     }
     return res.json();
@@ -58,7 +64,7 @@ export const addVotesToArticle = (id, newVote) => {
     if (!res.ok) {
       return Promise.reject({
         status: res.status,
-        msg: "Voting failed",
+        msg: "Unable to submit vote",
       });
     }
     return res.json();
@@ -80,7 +86,7 @@ export const addCommentToArticle = (id, user, commentContent) => {
     if (!res.ok) {
       return Promise.reject({
         status: res.status,
-        msg: "Comment submission failed",
+        msg: "Unable to submit comment",
       });
     }
     return res.json();
@@ -94,7 +100,7 @@ export const deleteCommentById = (id) => {
     if (!res.ok) {
       return Promise.reject({
         status: res.status,
-        msg: "Failed to delete comment",
+        msg: "Unable to delete comment",
       });
     }
   });
@@ -106,7 +112,7 @@ export const getTopics = () => {
       if (!res.ok) {
         return Promise.reject({
           status: res.status,
-          msg: "Failed to fetch article list",
+          msg: "Unable to fetch topic list",
         });
       }
       return res.json();

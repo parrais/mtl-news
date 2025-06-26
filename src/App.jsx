@@ -6,6 +6,7 @@ import Article from "./components/Article";
 import Topics from "./components/Topics";
 import Topic from "./components/Topic";
 import Home from "./components/Home";
+import ErrorPage from "./components/ErrorPage";
 import "./App.css";
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/topics/:slug" element={<Topic />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:article_id" element={<Article />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </main>
       <Footer />

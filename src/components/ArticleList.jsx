@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getArticles } from "../api";
 import ArticleCard from "./ArticleCard";
 
@@ -10,6 +11,7 @@ const ArticleList = ({ slug }) => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     console.log("ArticleList useEffect called");
@@ -22,6 +24,7 @@ const ArticleList = ({ slug }) => {
       .catch((err) => {
         console.log(err);
         setIsError(true);
+        setErrorMessage(err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -39,7 +42,10 @@ const ArticleList = ({ slug }) => {
   if (isError) {
     return (
       <section>
-        <p>Unable to load articles</p>
+        <p>{errorMessage.msg}</p>
+        <h3>
+          <Link to={`/`}>Go back to the home page</Link>
+        </h3>
       </section>
     );
   }
@@ -48,6 +54,9 @@ const ArticleList = ({ slug }) => {
     return (
       <section>
         <p>No articles found</p>
+        <h3>
+          <Link to={`/`}>Go back to the home page</Link>
+        </h3>
       </section>
     );
   }

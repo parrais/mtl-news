@@ -13,7 +13,7 @@ const CommentCard = ({ comment }) => {
     setStatusComment("Deleting comment...");
     deleteCommentById(comment_id)
       .then((response) => {
-        setCommentClasses("comment-hard hidden-card");
+        setCommentClasses("comment-card hidden-card");
         setStatusComment("Comment deleted");
       })
       .catch((error) => {

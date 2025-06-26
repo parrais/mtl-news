@@ -45,7 +45,11 @@ const CommentList = ({ article_id }) => {
     return (
       <section className="comment-area">
         <section className="new-comment-form">
-          <CommentForm article_id={article_id} />
+          <CommentForm
+            article_id={article_id}
+            comments={comments}
+            setComments={setComments}
+          />
         </section>
         <section className="comment-list-area">
           <p>No comments found</p>
