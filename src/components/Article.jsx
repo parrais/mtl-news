@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { getArticleById, addVotesToArticle } from "../api";
-import { useParams, Link } from "react-router-dom";
-import CommentList from "./CommentList";
+import { useEffect, useState } from 'react';
+import { getArticleById, addVotesToArticle } from '../api';
+import { useParams, Link } from 'react-router-dom';
+import CommentList from './CommentList';
 
 const Article = () => {
   const { article_id } = useParams();
@@ -12,7 +12,7 @@ const Article = () => {
   const [isCommentsFetched, setIsCommentsFetched] = useState(false);
   const [isCommentsShown, setIsCommentsShown] = useState(false);
   const [commentsClasses, setCommentsClasses] = useState(
-    "comment-list hidden-comments"
+    'comment-list hidden-comments'
   );
   const [hasVoted, setHasVoted] = useState(false);
   const [voteCount, setVoteCount] = useState(0);
@@ -24,10 +24,10 @@ const Article = () => {
     }
     if (!isCommentsShown) {
       setIsCommentsShown(true);
-      setCommentsClasses("comment-list");
+      setCommentsClasses('comment-list');
     } else {
       setIsCommentsShown(false);
-      setCommentsClasses("comment-list hidden-comments");
+      setCommentsClasses('comment-list hidden-comments');
     }
   };
 
@@ -46,12 +46,12 @@ const Article = () => {
     addVotesToArticle(article_id, input).catch((err) => {
       setVoteCount((currentVotes) => currentVotes - input);
       setHasVoted(false);
-      setVoteError("Your vote was not successful. Please try again!");
+      setVoteError('Your vote was not successful. Please try again!');
     });
   };
 
   useEffect(() => {
-    console.log("Article useEffect called");
+    console.log('Article useEffect called');
     setIsLoading(true);
     setIsError(false);
     getArticleById(article_id)
@@ -113,22 +113,22 @@ const Article = () => {
           <p>By: {author}</p>
           <p>Topic: {topic}</p>
           <p>
-            Votes:{" "}
+            Votes:{' '}
             <button onClick={handleDownVote} disabled={hasVoted}>
               -1
-            </button>{" "}
-            {voteCount}{" "}
+            </button>{' '}
+            {voteCount}{' '}
             <button onClick={handleUpVote} disabled={hasVoted}>
               +1
-            </button>{" "}
+            </button>{' '}
             {voteError}
           </p>
           <p>Comments: {comment_count}</p>
           <p>{readableDate}</p>
-          <p>{body}</p>
+          <p className="left-paragraph">{body}</p>
           <p>
             <button onClick={toggleComments}>
-              {isCommentsShown ? "Hide comments" : "Show comments"}
+              {isCommentsShown ? 'Hide comments' : 'Show comments'}
             </button>
           </p>
         </section>
