@@ -1,49 +1,60 @@
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: paleturquoise;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-.App {
+#root {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
   text-align: center;
-  color: navy;
   font-weight: 600;
   font-size: 1.1rem;
 }
 
-.article-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+.article-list,
+.comment-list,
+.topic-list {
   list-style-type: none;
   padding: 0;
 }
 
-.comment-list {
-  display: inline;
-  justify-content: center;
-  list-style-type: none;
-  padding: 0;
-}
 .topic-list {
-  display: inline-flex;
+  display: flex;
   justify-content: center;
-  list-style-type: none;
-  padding: 0;
+}
+
+.article-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0px 0px;
 }
 
 .article-card,
 .comment-card,
 .topic-card {
-  border: 1px solid black;
+  text-align: left;
+  border: 1px solid slategrey;
   margin: 1em;
   padding: 1em;
   border-radius: 5px;
 }
 
-.article-card,
-.topic-card > h2 {
-  margin: 0;
+.topic-card {
+  flex: 1 1 0;
+}
+
+.topic-card h3,
+.article-card h3,
+.centered-paragraph {
+  text-align: center;
+}
+
+.article-card img {
+  display: block;
+  margin: auto;
+}
+
+.left-paragraph {
+  text-align: justify;
 }
 
 .article-thumbnail {
