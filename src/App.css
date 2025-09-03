@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 #root {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -8,6 +8,20 @@
   text-align: center;
   font-weight: 600;
   font-size: 1.1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Nunito', Arial, Helvetica, sans-serif;
+}
+
+.main-title {
+  font-weight: bolder;
+  margin-bottom: 0;
 }
 
 .article-list,
@@ -53,8 +67,9 @@
   margin: auto;
 }
 
-.left-paragraph {
+.body-paragraph {
   text-align: justify;
+  font-weight: 300;
 }
 
 .article-thumbnail {

@@ -125,7 +125,7 @@ const Article = () => {
           </p>
           <p>Comments: {comment_count}</p>
           <p>{readableDate}</p>
-          <p className="left-paragraph">{body}</p>
+          <p className="body-paragraph">{body}</p>
           <p>
             <button onClick={toggleComments}>
               {isCommentsShown ? 'Hide comments' : 'Show comments'}
