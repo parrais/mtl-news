@@ -1,13 +1,13 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { UserContext } from "../contexts/UserContext";
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../contexts/UserContext';
 
 function Header() {
   const { username } = useContext(UserContext);
   return (
     <header>
-      <h1>
-        {" "}
+      <h1 className="main-title">
+        {' '}
         <Link to="/">MTL News</Link>
       </h1>
       <p>News For Your Community</p>
